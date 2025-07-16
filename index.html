@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>My Expense Tracker</h1>
+      <button id="toggleDark">🌙 Dark Mode</button>
+    </header>
+
+    <section id="dashboard">
+      <div>
+        <h5>Total Balance</h5>
+        <span id="balance">₹0.00</span>
+      </div>
+      <div>
+        <h5>Income</h5>
+        <span id="income">₹0.00</span>
+      </div>
+      <div>
+        <h5>Expense</h5>
+        <span id="expense">₹0.00</span>
+      </div>
+    </section>
+
+    <section id="charts">
+      <canvas id="categoryChart"></canvas>
+    </section>
+
+    <section id="filters">
+      <select id="filterCategory"><option value="all">All Categories</option></select>
+      <input type="month" id="filterMonth"/>
+    </section>
+
+    <section id="transactions">
+      <h3>Transactions</h3>
+      <ul id="transactionList" data-placeholder="No transactions."></ul>
+    </section>
+
+    <section id="categoryTotals">
+      <h3>Category Budgets & Totals</h3>
+      <ul id="categoryList"></ul>
+    </section>
+
+    <section id="addTransaction">
+      <h3>Add / Edit Transaction</h3>
+      <form id="transactionForm">
+        <div class="type-toggle">
+            <button type="button" id="incomeBtn" class="active">INCOME</button>
+            <button type="button" id="expenseBtn">EXPENSE</button>
+        </div>
+        <input type="hidden" id="trxType" value="income" />
+
+        <input type="text" id="trxName" placeholder="NAME" required/>
+        <input type="number" id="trxAmount" placeholder="AMOUNT" step="any" required/>
+        <input type="date" id="trxDate" required/>
+        <select id="trxCategory" required><option value="">category</option></select>
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+
+    <section id="budgets">
+      <h3>Set Category Budgets</h3>
+      <form id="budgetForm"></form>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

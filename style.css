@@ -1,0 +1,290 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+:root {
+  --bg: #f4f7fa;
+  --text: #333;
+  --primary: #0066cc;
+  --income: #2ecc71;
+  --expense: #e74c3c;
+  --card-bg: #ffffff;
+  --accent1: #dff0ff;
+  --accent2: #e8f7ea;
+  --accent3: #ffecec;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Poppins, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  padding-bottom: 2rem;
+}
+
+main {
+  max-width: 480px;
+  width: 100%;
+  padding: 1rem;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 8px;
+}
+
+header h1 {
+  font-size: 1.5rem;
+}
+
+header button {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #fff;
+  padding: 0.4rem 0.7rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+section {
+  margin: 1rem 0;
+}
+
+#dashboard {
+  display: flex;
+  justify-content: space-around;
+  background: var(--accent1);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+#dashboard div {
+  text-align: center;
+}
+
+#dashboard h5 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+#dashboard span {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+#charts canvas {
+  width: 100% !important;
+  max-height: 220px !important;
+  margin-top: 0.5rem;
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+
+#filters {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+#filters select,
+#filters input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#transactions ul {
+  max-height: 240px;
+  overflow-y: auto;
+  list-style: none;
+  background: var(--card-bg);
+  padding: 0.5rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#transactions li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+#transactions strong {
+  font-weight: 500;
+}
+
+#transactions span {
+  font-weight: bold;
+}
+
+#transactions .income {
+  color: var(--income);
+}
+
+#transactions .expense {
+  color: var(--expense);
+}
+
+#categoryTotals ul {
+  list-style: none;
+  padding: 0.5rem;
+  background: var(--card-bg);
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#categoryTotals li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.25rem 0;
+}
+
+form, #budgets form {
+  background: var(--card-bg);
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+form input, form select, form button {
+  width: 100%;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+form button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.dark-mode {
+  background: #2c3e50;
+  color: #ecf0f1;
+}
+
+.dark-mode header {
+  background: #1a252f;
+}
+
+.dark-mode form,
+.dark-mode section,
+.dark-mode #transactions ul,
+.dark-mode #categoryTotals ul {
+  background: #34495e;
+  color: #ecf0f1;
+}
+
+.type-toggle {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.type-toggle button {
+  flex: 1;
+  padding: 0.6rem 0;
+  font-weight: 600;
+  border: none;
+  background: #f0f0f0;
+  color: #333;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.type-toggle button.active#incomeBtn {
+  background: var(--income);
+  color: white;
+}
+
+.type-toggle button.active#expenseBtn {
+  background: var(--expense);
+  color: white;
+}
+/* 📱 Mobile Styles */
+@media (max-width: 600px) {
+  main {
+    padding: 0.5rem;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  #dashboard {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  #dashboard div {
+    width: 100%;
+  }
+
+  #filters {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  #filters select,
+  #filters input {
+    width: 100%;
+  }
+
+  #charts canvas {
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  .type-toggle button {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+
+  form input,
+  form select,
+  form button {
+    font-size: 0.95rem;
+    padding: 0.6rem;
+  }
+
+  #transactions ul {
+    max-height: 300px;
+  }
+
+  #transactions li {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  #transactions li div:last-child {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+}
+
