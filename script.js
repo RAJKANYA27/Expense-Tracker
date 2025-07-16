@@ -1,9 +1,9 @@
-// Core setup
+
 let transactions = JSON.parse(localStorage.getItem("transactions") || "[]");
 let budgets = JSON.parse(localStorage.getItem("budgets") || "{}");
 let editingId = null;
 
-// Elements
+
 const qty = id => document.getElementById(id);
 const balanceE = qty("balance"), incomeE = qty("income"), expenseE = qty("expense");
 const trxListE = qty("transactionList"), catListE = qty("categoryList");
@@ -28,14 +28,14 @@ expenseBtn.onclick = () => {
 };
 
 
-// Theme setup
+
 if (localStorage.getItem("darkMode") === "true") document.body.classList.add("dark-mode");
 toggleDM.onclick = () => {
   document.body.classList.toggle("dark-mode");
   localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
 };
 
-// Helpers
+
 const saveAll = () => {
   localStorage.setItem("transactions", JSON.stringify(transactions));
   localStorage.setItem("budgets", JSON.stringify(budgets));
@@ -48,7 +48,7 @@ const formatDate = dateStr => {
   return d.toLocaleDateString("en-IN", options);
 };
 
-// Render forms & lists
+
 function renderForms() {
   trsCat.innerHTML = "<option value=''>Category</option>";
   filterCat.innerHTML = "<option value='all'>All Categories</option>";
@@ -76,7 +76,7 @@ function renderForms() {
   });
 }
 
-// Render everything
+
 function renderAll() {
   renderForms();
 
@@ -86,7 +86,7 @@ function renderAll() {
       (!fm || t.date.startsWith(fm));
   });
 
-  // Transaction List
+  
   trxListE.innerHTML = filtered.map(t => `
     <li>
       <div>
@@ -102,7 +102,7 @@ function renderAll() {
     </li>
   `).join("") || "<li style='text-align:center;color:#aaa;padding:1rem;'>No transactions.</li>";
 
-  // Totals
+  
   let income = 0, expense = 0;
   const catTotals = {};
   transactions.forEach(t => {
@@ -116,7 +116,7 @@ function renderAll() {
   incomeE.textContent = `₹${income.toFixed(2)}`;
   expenseE.textContent = `₹${expense.toFixed(2)}`;
 
-  // Budgets
+ 
   catListE.innerHTML = Object.keys(budgets).map(c => {
     const tot = catTotals[c] || 0;
     const bud = budgets[c];
@@ -130,7 +130,7 @@ function renderAll() {
     </li>`;
   }).join("");
 
-  // Pie Chart
+  
   const catLabels = Object.keys(catTotals);
   const catValues = catLabels.map(c => catTotals[c]);
   if (window.catChart) window.catChart.destroy();
@@ -154,7 +154,7 @@ function renderAll() {
   localStorage.setItem("transactions", JSON.stringify(transactions));
 }
 
-// Submit Handler
+
 trxForm.onsubmit = e => {
   e.preventDefault();
   const entry = {
@@ -175,7 +175,7 @@ trxForm.onsubmit = e => {
   saveAll();
 };
 
-// Edit
+
 window.editTrx = id => {
   const t = transactions.find(x => x.id === id);
   editingId = id;
@@ -186,7 +186,7 @@ window.editTrx = id => {
   trsCat.value = t.category;
 };
 
-// Delete
+
 window.delTrx = id => {
   if (confirm("Delete this transaction?")) {
     transactions = transactions.filter(t => t.id !== id);
@@ -194,9 +194,9 @@ window.delTrx = id => {
   }
 };
 
-// Filter change triggers rerender
+
 filterCat.onchange = renderAll;
 filterMon.onchange = renderAll;
 
-// Init
+
 renderAll();
